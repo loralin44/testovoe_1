@@ -32,63 +32,98 @@ const target = document.querySelector('text');
 const controller = new InputController(actionToBind,target);
 
 class InputController {
+
     constructor(actionToBind, target){
         this.actionToBind = actionToBind;
         this.target = target;
-        this. enabled = false;
+        this.enabled = false;
         this.focused = false;
         this.ACTION_ACTIVATED = "input-controller:action-activated";
         this.ACTION_DEACTIVATED = "input-controller:action-deactivated";
+        this.actionName = '';
+        this.keyCode = null;
+        this.dontEnable = false;
 
-        target.addEventListener('keydown',function(event){
-            for( let elem  in actionToBind){
+    }
+
+    _bindActions(actionName){
+
+        
+
+
+
+
+        // target.addEventListener('keydown',function(event){
+        // for( let elem  in actionToBind){
             
-                for( let el in elem){
-                    for(let i = 0 ; i < el.keys_code.length(); i++){
-                        if (el.keys_code[i]== event.event.keyCode){
-                            const actionName = el.name;
-                        }
-                    }
+        //     for( let el in elem){
+        //         for(let i = 0 ; i < el.keys_code.length(); i++){
+        //             if (el.keys_code[i] == event.event.keyCode){
+        //                     this.actionName = el.name;
+        //                     this.keyCode = el.keyCode;
+        //                     console.log(ac);
+        //                     console.log(keyCode);
+        //             }
+        //         }
                     
-                }
-            }
-        });
-        
-        
-    
-        // bindAction(actionToBind){
-
-        // }
-
-        // enableAction(actionName){
-            
-
-        // }
-        // disableAction(actionName){
-
-        // }
-        // _attach(target) {
-        //     target.addEventListener('keydown',function(event){
-
-        //     });
-            
-        // }
-        // detach(){
-
-        // }
-        // isActionActive(actionName){
-
-        // }
-
-        // isKeyPreesed(keyCode){
-        //     if(){
-
         //     }
             
+        // });
 
-        // }
-
-        
-        
     }
+
+
+    // target.addEventListener('keydown',function(event){
+    //     for( let elem  in actionToBind){
+            
+    //         for( let el in elem){
+    //             for(let i = 0 ; i < el.keys_code.length(); i++){
+    //                 if (el.keys_code[i] == event.event.keyCode){
+    //                         this.actionName = el.name;
+    //                         this.keyCode = el.keyCode;
+    //                         console.log(ac);
+    //                         console.log(keyCode);
+    //                 }
+    //             }
+                    
+    //         }
+            
+    // });
+        
+        
+   
+
+    _enableAction(actionName){
+            
+    }
+    _disableAction(actionName){
+
+    }
+    _attach(target, dontEnable) {
+        target.addEventListener('keydown',function(event){
+
+        });
+    }        
+    _detach(){
+        this.target.removeEventListener('keydown');  
+    }
+    _isActionActive(actionName) {
+        if(actionName == ''){
+            return false;
+        }else{
+            return true; 
+        }   
+    }
+
+    _isKeyPreesed(keyCode){
+        if (keyCode!= null){
+            return true;
+        }else {
+            return false;
+        }
+          
+
+    }     
+        
+    
 }
