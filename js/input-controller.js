@@ -41,35 +41,29 @@ class InputController {
         this.ACTION_ACTIVATED = "input-controller:action-activated";
         this.ACTION_DEACTIVATED = "input-controller:action-deactivated";
         this.actionName = '';
+        this.key = '';
         this.keyCode = null;
         this.dontEnable = false;
 
-    }
-
-    _bindActions(actionName){
-
+       
         
 
+    }
+    _getActionName(){
 
+    }
 
-
-        // target.addEventListener('keydown',function(event){
-        // for( let elem  in actionToBind){
-            
-        //     for( let el in elem){
-        //         for(let i = 0 ; i < el.keys_code.length(); i++){
-        //             if (el.keys_code[i] == event.event.keyCode){
-        //                     this.actionName = el.name;
-        //                     this.keyCode = el.keyCode;
-        //                     console.log(ac);
-        //                     console.log(keyCode);
-        //             }
-        //         }
-                    
-        //     }
-            
-        // });
-
+    _bindActions(actionToBind){
+        this._attach(target);
+        for (let action in actionToBind){
+            for (let elem in action){
+                for (let i = 0 ; i < elem.keys_code.length(); i++){
+                    if (elem.keys_code[i] == this.keyCode){
+                        this.actionName = elem.name;
+                    }
+                }
+            }
+        }
     }
 
 
@@ -94,14 +88,22 @@ class InputController {
    
 
     _enableAction(actionName){
+        if(_isActionActive()){
+
+        }else{
+
+        }
             
     }
     _disableAction(actionName){
 
     }
-    _attach(target, dontEnable) {
-        target.addEventListener('keydown',function(event){
-
+    _attach(target) {
+        target.addEventListener('keydown', (e) => {
+            
+            // this.key = event.key;
+            // this.keyCode = event.keyCode;
+             
         });
     }        
     _detach(){
