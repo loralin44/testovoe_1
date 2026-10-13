@@ -88,7 +88,7 @@ class InputController {
 
     }
     _attach(target, dontEnable) {
-        if (target.textContent.trim() === ''){
+        if (!target){
             console.log('Ссылка на объект пуста!');
         }
 
