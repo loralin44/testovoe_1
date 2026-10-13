@@ -41,7 +41,6 @@ class InputController {
         this._pressedKey = new Map();
         
         
-    
     }
 
     _bindActions(actionToBind){
@@ -76,15 +75,22 @@ class InputController {
         if (!action.enable){
             return;
         } 
-        
 
+        if( this._isActionActive(action)){
+            
+        }
             
     }
 
     disableAction(actionName){
+        const action = this._activity.get(actionName);
+        
 
     }
-    _attach(target) {
+    _attach(target, dontEnable) {
+        if (target.textContent.trim() === ''){
+            console.log('Ссылка на объект пуста!');
+        }
 
 
         target.addEventListener('keydown', (e) => {
