@@ -1,26 +1,24 @@
 
-const actionToBind = {
-    moveLeft:{
-        keys:[37,65],
-        enable: false,
+// const actionToBind = {
+//     moveLeft:{
+//         keys:[37,65],
+//         enable: false,
         
-    },
-    moveRight:{
-        keys:[39,68],
-        enable: false,
-    },
-    moveUp:{     
-        keys:[38,87],
-        enable: false,
-    },
-    moveDown:{
-        keys:[40,83],
-        enable: false,
-    },
+//     },
+//     moveRight:{
+//         keys:[39,68],
+//         enable: false,
+//     },
+//     moveUp:{     
+//         keys:[38,87],
+//         enable: false,
+//     },
+//     moveDown:{
+//         keys:[40,83],
+//         enable: false,
+//     },
 
-};
-
-
+// };
 
 
 class InputController {
@@ -39,6 +37,7 @@ class InputController {
         this._activity = new Map();
         this._KeyToAction = new Map();
         this._pressedKey = new Map();
+        this.dontEnable = false;
         
         
     }
@@ -71,11 +70,11 @@ class InputController {
         if(!action.activeName) {
             return;
         }
- 
-        if (!action.enable){
+        if(action.enable){
             return;
-        } 
-
+        }
+        action.enable = true;
+  
         if( this._isActionActive(action)){
             
         }
@@ -94,8 +93,11 @@ class InputController {
 
 
         target.addEventListener('keydown', (e) => {
-           
-             
+            this._pressedKey.set
+            if( this._KeyToAction.keys == e.keyCode){
+                this._pressedKey.add(e.keyCode);
+            }
+  
         });
     }  
 
