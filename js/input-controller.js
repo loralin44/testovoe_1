@@ -35,12 +35,10 @@ class InputController {
         this.ACTION_ACTIVATED = "input-controller:action-activated";
         this.ACTION_DEACTIVATED = "input-controller:action-deactivated";
 
-        // this.actionName = '';
-        // this.key = '';
-        // this.keyCode = null;
-        // this.dontEnable = false;
+    
         this._activity = new Map();
         this._KeyToAction = new Map();
+        this._pressedKey = new Map();
         
         
     
@@ -60,7 +58,7 @@ class InputController {
                 action.keys.add(code);
                 if(!this._KeyToAction.has(code)){
                     this._KeyToAction.set(code, new Set());
-                     
+
                 }
                 this._KeyToAction.get(code).add(activeName);
             }
