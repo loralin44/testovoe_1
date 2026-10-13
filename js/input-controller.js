@@ -67,22 +67,24 @@ class InputController {
     }
 
     enableAction(actionName){
-        if(_isActionActive()){
-
-        }else{
-
+        const action = this._activity.get(actionName);
+        
+        if(!action.activeName) {
+            return;
         }
+ 
+        if (!action.enable){
+            return;
+        }  
             
     }
+
     disableAction(actionName){
 
     }
     _attach(target) {
         target.addEventListener('keydown', (e) => {
-            // console.log(this.key);
-            
-            // this.key = e.key;
-            // this.keyCode = e.keyCode;
+           
              
         });
     }  
@@ -91,7 +93,7 @@ class InputController {
         // this.target.removeEventListener('keydown');  
     }
     _isActionActive(actionName) {
-        if(actionName == ''){
+        if(!this._activity.has(actionName)){
             return false;
         }else{
             return true; 
@@ -99,7 +101,7 @@ class InputController {
     }
 
     _isKeyPreesed(keyCode){
-        if (keyCode!= null){
+        if (){
             return true;
         }else {
             return false;
