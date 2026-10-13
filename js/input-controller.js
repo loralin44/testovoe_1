@@ -88,17 +88,26 @@ class InputController {
     }
     _attach(target, dontEnable) {
         if (!target){
-            console.log('Ссылка на объект пуста!');
+           return;
         }
 
+        this._pressKeyDown = (e) =>{
+            if(!this._KeyToAction.has(e.keyCode)) return;
+            
+        }
+        target.addEventListener('keydown', this._pressKeyDown);
 
-        target.addEventListener('keydown', (e) => {
-            this._pressedKey.set
-            if( this._KeyToAction.keys == e.keyCode){
-                this._pressedKey.add(e.keyCode);
-            }
+
+
+
+
+        // target.addEventListener('keydown', (e) => {
+        //     this._pressedKey.set
+        //     if( this._KeyToAction.keys == e.keyCode){
+        //         this._pressedKey.add(e.keyCode);
+        //     }
   
-        });
+        // });
     }  
 
     _detach(){
