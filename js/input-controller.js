@@ -43,9 +43,7 @@ class InputController {
         this._KeyToAction = new Map();
         
         
-    }
-    _getActionName(){
-
+    
     }
 
     _bindActions(actionToBind){
@@ -60,18 +58,17 @@ class InputController {
             const action = actionToBind[activeName];
             for (const code in cfg.keys){
                 action.keys.add(code);
+                if(!this._KeyToAction.has(code)){
+                    this._KeyToAction.set(code, new Set());
+                     
+                }
+                this._KeyToAction.get(code).add(activeName);
             }
 
         }
     }
 
-
-
-        
-        
-   
-
-    _enableAction(actionName){
+    enableAction(actionName){
         if(_isActionActive()){
 
         }else{
@@ -79,7 +76,7 @@ class InputController {
         }
             
     }
-    _disableAction(actionName){
+    disableAction(actionName){
 
     }
     _attach(target) {
