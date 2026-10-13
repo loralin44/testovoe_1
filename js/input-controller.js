@@ -53,11 +53,11 @@ class InputController {
                 this._activity.set(activeName,{
                     keys : new Set(),
                     enable : cfg.enable === true
-                })
+                });
             }
-            const action = actionToBind[activeName];
-            for (const code in cfg.keys){
-                action.keys.add(code);
+            const action = this._activity.get(activeName);
+            for (const code of cfg.keys){
+                action.get(keys).add(code);
                 if(!this._KeyToAction.has(code)){
                     this._KeyToAction.set(code, new Set());
 
@@ -164,5 +164,7 @@ const stage  = document.querySelector('stage');
 
 const controller =  new InputController(actionToBind, stage);
 
-controller.enableAction('moveLeft');
-controller.detach();
+console.log(controller._bindActions(actionToBind));
+
+// console.log(controller.enableAction('moveLeft'));
+// controller.detach();
