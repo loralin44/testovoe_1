@@ -43,6 +43,7 @@ class InputController {
         this.dontEnable = false;
         this._target = null;
         
+        
     }
     //достаем данные из объекта и преобразуем в Map для удобства доступа 
     _bindActions(actionToBind){
@@ -65,6 +66,14 @@ class InputController {
             }
 
         }
+    }
+    _event(event_type, ){
+        const eventActive = new CustomEvent('event_type',{
+            detail:{key : 'actionName'}
+
+        });
+        
+
     }
 
     enableAction(actionName){
