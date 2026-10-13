@@ -33,15 +33,19 @@ class InputController {
         this.ACTION_ACTIVATED = "input-controller:action-activated";
         this.ACTION_DEACTIVATED = "input-controller:action-deactivated";
 
+        this._KeyDown = null;
+        this._KeyUp = null;
+
     
         this._activity = new Map();
         this._KeyToAction = new Map();
-        this._pressedKey = new Map();
+        this._pressedKey = new Set();
         this.dontEnable = false;
+        this._target = null;
         
         
     }
-
+    //достаем данные из объекта и преобразуем в Map для удобства доступа 
     _bindActions(actionToBind){
         for (const activeName in actionToBind){
             const cfg = actionToBind[activeName];
@@ -67,18 +71,25 @@ class InputController {
     enableAction(actionName){
         const action = this._activity.get(actionName);
         
-        if(!action.activeName) {
-            return;
-        }
+        if(!action) return;
+        
         if(action.enable){
             return;
         }
         action.enable = true;
-  
-        if( this._isActionActive(action)){
-            
+
+        if (this.isActionActive(action)){
+            const EventEmiter = requiest("event");
+            const eventEmitter = new EventEmiter(); 
+
+
+
         }
-            
+
+
+
+        // const nowAction = ;
+         
     }
 
     disableAction(actionName){
@@ -87,19 +98,19 @@ class InputController {
         
     }
     
-    _attach(target, dontEnable) {
+    attach(target, dontEnable) {
+        this._target = target;
 
-        if (!target){
+        if (!this._target){
            return;
         }
-
         this._KeyDown = (e) =>{
 
             if(!this._KeyToAction.has(e.keyCode)) return;
-            this._pressedKey.set(e.keyCode, e.key);
+            this._pressedKey.add(e.keyCode);
               
         }
-        this._KeyUp = (e) => {
+        this._KeyUp = (e) =>{
             this._pressedKey.delete(e.keyCode);
             
         }
@@ -108,22 +119,40 @@ class InputController {
 
     }  
 
-    _detach(){
-        this.target.removeEventListener('keydown', this._KeyDown);  
-    }
+    detach(){
+        
+        if(this._target){
+            this._target.removeEventListener('keydown', this._KeyDown); 
+            this._target.removeEventListener('keyup', this._KeyUp); 
+        }
+
+        this._KeyUp = null;
+        this._KeyUp = null;
+        this._target = null;
+        this._pressedKey.clear();
 
 
-    _isActionActive(actionName) {
-        const active = this._activity[actionName];
-        if(!active.enable){return}
        
-           
     }
 
-    _isKeyPreesed(keyCode){
+
+    isActionActive(actionName) {
+        const action = this._activity.get(actionName);
+        if(!action.enable) return;
+        if(!action.actionName) return;
+        for (const key in action.keys){
+            if(this.isKeyPreesed(code)){
+                return true;
+            }else {
+                return false;
+            }
+        }
         
-        
+    }
+
+    isKeyPreesed(keyCode){
+        if(this._pressedKey.has(keyCode))return;
+
     }
          
-    
 }
