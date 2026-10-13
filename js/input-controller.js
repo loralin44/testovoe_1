@@ -75,7 +75,9 @@ class InputController {
  
         if (!action.enable){
             return;
-        }  
+        } 
+        
+
             
     }
 
@@ -83,6 +85,8 @@ class InputController {
 
     }
     _attach(target) {
+
+
         target.addEventListener('keydown', (e) => {
            
              
@@ -101,11 +105,11 @@ class InputController {
     }
 
     _isKeyPreesed(keyCode){
-        if (){
-            return true;
-        }else {
-            return false;
-        }
+        // if (){
+        //     return true;
+        // }else {
+        //     return false;
+        // }
           
 
     }     

@@ -1,26 +1,25 @@
-
 const actionToBind = {
-    "left":{
-        name:"moveLeft",
+    moveLeft:{
         keys:[37,65],
         enable: false,
         
     },
-    "right":{
-        name:"moveRight",
+    moveRight:{
         keys:[39,68],
         enable: false,
     },
-    "up":{
-        name:"moveUp",
+    moveUp:{     
         keys:[38,87],
         enable: false,
     },
-    "down":{
-        name:"moveDown",
+    moveDown:{
         keys:[40,83],
         enable: false,
-    }
-};
+    },
 
-const controller =  new InputController(actionToBind,target);
+};
+const stage  = document.querySelector('stage');
+
+const controller =  new InputController(actionToBind, stage);
+controller.enableAction('moveLeft');
+controller.enableAction('moveRight');
