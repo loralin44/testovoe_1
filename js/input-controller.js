@@ -85,8 +85,8 @@ class InputController {
         const action = this._activity.get(actionName);
         action.enable = false;
         
-
     }
+    
     _attach(target, dontEnable) {
 
         if (!target){
@@ -115,27 +115,15 @@ class InputController {
 
     _isActionActive(actionName) {
         const active = this._activity[actionName];
-        for (const key of active.keys){
-            if(this._pressedKey.get(key) == active.keys[key]){
-                return true;
-            }else{
-                return false;
-            }
-        }
+        if(!active.enable){return}
+       
            
     }
 
     _isKeyPreesed(keyCode){
-        if(this._pressedKey.get(key) == keyCode){
-            return true;
-        }else{
-            return false;
-        }
-
+        
         
     }
-    
-  
-        
+         
     
 }
