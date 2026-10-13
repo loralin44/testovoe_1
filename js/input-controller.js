@@ -36,14 +36,20 @@ class InputController {
     constructor(actionToBind, target){
         this.actionToBind = actionToBind;
         this.target = target;
+
         this.enabled = false;
         this.focused = false;
+
         this.ACTION_ACTIVATED = "input-controller:action-activated";
         this.ACTION_DEACTIVATED = "input-controller:action-deactivated";
+
         this.actionName = '';
         this.key = '';
         this.keyCode = null;
         this.dontEnable = false;
+        this._activity = new Map();
+        
+        
 
        
         
@@ -54,15 +60,9 @@ class InputController {
     }
 
     _bindActions(actionToBind){
-        this._attach(target);
-        for (let action in actionToBind){
-            for (let elem in action){
-                for (let i = 0 ; i < elem.keys_code.length(); i++){
-                    if (elem.keys_code[i] == this.keyCode){
-                        this.actionName = elem.name;
-                    }
-                }
-            }
+        for (const active in actionToBind){
+            const cfg = actionToBind[active];
+            
         }
     }
 
@@ -100,12 +100,14 @@ class InputController {
     }
     _attach(target) {
         target.addEventListener('keydown', (e) => {
+            // console.log(this.key);
             
-            // this.key = event.key;
-            // this.keyCode = event.keyCode;
+            // this.key = e.key;
+            // this.keyCode = e.keyCode;
              
         });
-    }        
+    }  
+
     _detach(){
         this.target.removeEventListener('keydown');  
     }
