@@ -67,12 +67,13 @@ class InputController {
 
         }
     }
-    _event(event_type, ){
-        const eventActive = new CustomEvent('event_type',{
-            detail:{key : 'actionName'}
-
+    _event(event_type, actionName){
+        if(!this._target)return;
+        const event = new CustomEvent(event_type,{
+            detail:{actionName : 'actionName'}
         });
-        
+        event.actionName = actionName;
+        this._target.dispatchEvent(event);
 
     }
 
@@ -85,9 +86,9 @@ class InputController {
             return;
         }
         action.enable = true;
-
+        
         if (this.isActionActive(action)){
-            let event = new CustomEvent (this.ACTION_ACTIVATED, actionName);
+           this._event(this.ACTION_ACTIVATED,actionName);
              
         }
 
