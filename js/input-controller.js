@@ -83,53 +83,59 @@ class InputController {
 
     disableAction(actionName){
         const action = this._activity.get(actionName);
+        action.enable = false;
         
 
     }
     _attach(target, dontEnable) {
+
         if (!target){
            return;
         }
 
-        this._pressKeyDown = (e) =>{
+        this._KeyDown = (e) =>{
+
             if(!this._KeyToAction.has(e.keyCode)) return;
+            this._pressedKey.set(e.keyCode, e.key);
+              
+        }
+        this._KeyUp = (e) => {
+            this._pressedKey.delete(e.keyCode);
             
         }
-        target.addEventListener('keydown', this._pressKeyDown);
+        target.addEventListener('keydown', this._KeyDown);
+        target.addEventListener('keyup', this._KeyUp);
 
-
-
-
-
-        // target.addEventListener('keydown', (e) => {
-        //     this._pressedKey.set
-        //     if( this._KeyToAction.keys == e.keyCode){
-        //         this._pressedKey.add(e.keyCode);
-        //     }
-  
-        // });
     }  
 
     _detach(){
-        // this.target.removeEventListener('keydown');  
+        this.target.removeEventListener('keydown', this._KeyDown);  
     }
+
+
     _isActionActive(actionName) {
-        if(!this._activity.has(actionName)){
-            return false;
-        }else{
-            return true; 
-        }   
+        const active = this._activity[actionName];
+        for (const key of active.keys){
+            if(this._pressedKey.get(key) == active.keys[key]){
+                return true;
+            }else{
+                return false;
+            }
+        }
+           
     }
 
     _isKeyPreesed(keyCode){
-        // if (){
-        //     return true;
-        // }else {
-        //     return false;
-        // }
-          
+        if(this._pressedKey.get(key) == keyCode){
+            return true;
+        }else{
+            return false;
+        }
 
-    }     
+        
+    }
+    
+  
         
     
 }
