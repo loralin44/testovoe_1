@@ -88,16 +88,18 @@ class InputController {
         action.enable = true;
         
         if (this.isActionActive(action)){
-           this._event(this.ACTION_ACTIVATED,actionName);
+           this._event(this.ACTION_ACTIVATED, actionName);
              
         }
 
     }
     
-
     disableAction(actionName){
         const action = this._activity.get(actionName);
         action.enable = false;
+        if (!this.isActionActive(action)){
+            this._event(this.ACTION_DEACTIVATED,actionName);
+        }
         
     }
     
