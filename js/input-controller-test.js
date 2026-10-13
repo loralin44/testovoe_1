@@ -22,3 +22,5 @@ const actionToBind = {
         enable: false,
     }
 };
+
+const controller =  new InputController(actionToBind,target);

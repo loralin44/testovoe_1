@@ -1,31 +1,27 @@
 
 const actionToBind = {
     moveLeft:{
-        keys_code:[37,65],
+        keys:[37,65],
         enable: false,
         
     },
     moveRight:{
-        keys_code:[39,68],
+        keys:[39,68],
         enable: false,
     },
     moveUp:{     
-        keys_code:[38,87],
+        keys:[38,87],
         enable: false,
     },
     moveDown:{
-        keys_code:[40,83],
+        keys:[40,83],
         enable: false,
     },
 
 };
 
-// document.addEventListener('keydown', function(event) {
-//     console.log(event.target);
- 
-// });
-const target = document.querySelector('text');
-// const controller = new InputController(actionToBind,target);
+
+
 
 class InputController {
 
@@ -44,6 +40,7 @@ class InputController {
         // this.keyCode = null;
         // this.dontEnable = false;
         this._activity = new Map();
+        this._KeyToAction = new Map();
         
         
     }
@@ -56,17 +53,14 @@ class InputController {
             const cfg = actionToBind[activeName];
             if(!this._activity.has(activeName)){
                 this._activity.set(activeName,{
-                    key : new Set(),
+                    keys : new Set(),
                     enable : cfg.enable === true
                 })
             }
             const action = actionToBind[activeName];
-            for (const code in cfg.key ){
-                if(!)
+            for (const code in cfg.keys){
+                action.keys.add(code);
             }
-
-
-
 
         }
     }
